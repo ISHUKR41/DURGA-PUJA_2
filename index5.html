@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website with Video Preloader</title>
+    <style>
+        /* Preloader container */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black; /* Background color while the video loads */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* On top of everything else */
+            overflow: hidden;
+        }
+
+        /* Fullscreen video styling */
+        #preloader video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Make sure the video covers the whole screen */
+        }
+
+        /* Hide the content until the video finishes or page loads */
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease; /* Smooth fade-in for content */
+        }
+
+        /* Once the preloader is removed, show the content */
+        body.loaded {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader with a video -->
+    <div id="preloader">
+        <video autoplay muted playsinline>
+            <source src="welcome.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Main content of the page -->
+    <div id="main-content">
+        <h1>Welcome to My Website!</h1>
+        <p>This is the main content of the website.</p>
+    </div>
+
+    <script>
+        // JavaScript to handle preloader behavior
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById('preloader');
+            const body = document.querySelector('body');
+
+            // Hide the preloader after the page finishes loading
+            preloader.style.display = 'none';
+
+            // Make the body visible after the preloader hides
+            body.classList.add('loaded');
+        });
+    </script>
+
+</body>
+</html>
